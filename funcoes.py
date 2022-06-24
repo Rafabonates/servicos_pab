@@ -33,6 +33,7 @@ def read_files(remessa):  # itera os arquivos extraidos e retorna uma lista com 
     endereco = os.path.abspath(remessa)
     extract_files(remessa, endereco)
     enderecooficios = os.path.abspath(remessa + '/..') + '/extraction'
+    print(enderecooficios)
     for oficio in range(1, len(os.listdir(enderecooficios))):
         # print(range(len(os.listdir(enderecooficios))))
         # print(oficio)
@@ -41,19 +42,20 @@ def read_files(remessa):  # itera os arquivos extraidos e retorna uma lista com 
         # print(os.path.abspath(oficio))
         # numero = random.randint(1, 2000)
         oficionovo = (str(numero) + '.pdf')
-        # print(oficionovo)
+        print(oficio)
         # os.rename((enderecooficios + '/' + oficio), (enderecooficios + '/' + oficionovo))
         # conteudo = get_data(enderecooficios + '/' + oficionovo)
         # print(conteudo)
+        print(os.listdir(enderecooficios))
         oficiolido = os.listdir(enderecooficios)[oficio]
+        numero += 1
         if not oficiolido.endswith(".pdf"):
             continue
-        # print(oficiolido)
+        print(oficiolido)
         os.rename((enderecooficios + '/' + oficiolido), (enderecooficios + '/' + oficionovo))
         # conteudo = get_data(enderecooficios + '/' + oficionovo)
         conteudo = get_data(enderecooficios + '/' + oficionovo)
         dados.append(dadosOficio(conteudo, remessa))
-        numero =+ 1
 
     try:
         shutil.rmtree(enderecooficios)
@@ -63,13 +65,12 @@ def read_files(remessa):  # itera os arquivos extraidos e retorna uma lista com 
     return dados
 
 
-
 def list_data(dados, style: Optional[str] = None):
     """Lists beers in database"""
     table = Table(title="Remessa TRF")
     headers = ["oficio", "data", "data_remessa", "remessa", "meio", "Tribunal", "orgao", "conta", "nome"]
     for header in headers:
-        table.add_column(header, style="magenta", no_wrap=True, min_width=10)
+        table.add_column(header, style="magenta", min_width=10)
     for linha in dados:
         table.add_row(*linha)
         # linha.date = linha.date.strftime("%Y-%m-%d")

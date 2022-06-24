@@ -21,13 +21,15 @@ def dadosOficio(conteudo, remessa):
     requerenteOficio = beneficiarioRegex.search(conteudo)
     benficiario = (str(requerenteOficio.group())[12:])
 
-    dataremessa = remessa[:8]
-    dataremessa = dataremessa[:2] + '/' + dataremessa[2:4] + '/' + dataremessa[4:]
     data = data.lower().replace('de ', '')
     data = datetime.datetime.strptime(data, '%d %B %Y')
     data = datetime.datetime.strftime(data, '%d/%m/%Y')
+    nomeremessa = str(remessa[-17:-4])
 
-    dados = [oficio, data, dataremessa, remessa, "E-mail", "TRF3", "TRF3", conta, benficiario]
+    dataremessa = nomeremessa[:8]
+    dataremessa = dataremessa[:2] + '/' + dataremessa[2:4] + '/' + dataremessa[4:]
+
+    dados = [oficio, data, dataremessa, nomeremessa, "E-mail", "TRF3", "TRF3", conta, benficiario]
     #dados.insert(2, "E-mail")
     #dados.insert(3, "TRF3")
     # dados.insert(4, "TRF3")
