@@ -24,7 +24,8 @@ def dadosOficio(conteudo, remessa):
     data = data.lower().replace('de ', '')
     data = datetime.datetime.strptime(data, '%d %B %Y')
     data = datetime.datetime.strftime(data, '%d/%m/%Y')
-    nomeremessa = str(remessa[-17:-4])
+    nomeremessa = (str(remessa).split(sep='/'))[-1]
+    print(nomeremessa)
 
     dataremessa = nomeremessa[:8]
     dataremessa = dataremessa[:2] + '/' + dataremessa[2:4] + '/' + dataremessa[4:]
